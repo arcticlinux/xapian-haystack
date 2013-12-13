@@ -1206,10 +1206,10 @@ class XapianSearchQuery(BaseSearchQuery):
             return xapian.Query('%s%s' % (DOCUMENT_CT_TERM_PREFIX, term))
         elif field:
             stemmed = 'Z%s%s%r' % (
-                DOCUMENT_CUSTOM_TERM_PREFIX, field.upper(), stem(term)
+                DOCUMENT_CUSTOM_TERM_PREFIX, field.upper().encode('utf-8'), stem(term)
             )
             unstemmed = '%s%s%s' % (
-                DOCUMENT_CUSTOM_TERM_PREFIX, field.upper(), term
+                DOCUMENT_CUSTOM_TERM_PREFIX, field.upper().encode('utf-8'), term
             )
         else:
             stemmed = 'Z%s' % stem(term)
@@ -1237,7 +1237,7 @@ class XapianSearchQuery(BaseSearchQuery):
             return xapian.Query(
                 xapian.Query.OP_PHRASE, [
                     '%s%s%s' % (
-                        DOCUMENT_CUSTOM_TERM_PREFIX, field.upper(), term
+                        DOCUMENT_CUSTOM_TERM_PREFIX, field.upper().encode('utf-8'), term
                     ) for term in term_list
                 ]
             )
