@@ -1205,7 +1205,7 @@ class XapianSearchQuery(BaseSearchQuery):
         elif field == 'django_ct':
             return xapian.Query('%s%s' % (DOCUMENT_CT_TERM_PREFIX, term))
         elif field:
-            stemmed = 'Z%s%s%s' % (
+            stemmed = 'Z%s%s%r' % (
                 DOCUMENT_CUSTOM_TERM_PREFIX, field.upper(), stem(term)
             )
             unstemmed = '%s%s%s' % (
